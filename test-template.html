@@ -1,0 +1,21 @@
+<script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+<crowd-form>
+        <audio controls
+        autoplay loop>
+            <source src="{{ task.input.audiopath }}#t={{ task.input.start_time }},{{ task.input.end_time }}"
+            type="audio/mp4">
+            Your browser does not support the audio element.
+        </audio>
+
+        <h3>Instructions</h3>
+        <p>Transcribe the audio</p>
+        <p>Ignore "umms", "hmms", "uhs" and other non-textual phrases. Click the space below to start typing.</p>
+        <crowd-text-area name="transcription" rows="4"></crowd-text-area>
+
+      <full-instructions header="Transcription Instructions">
+        <h2>Instructions</h2>
+        <p>Click the play button once and listen carefully to the audio section clip. Type what you hear in the box below.</p>
+      </full-instructions>
+
+</crowd-form>
