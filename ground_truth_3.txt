@@ -1,103 +1,101 @@
 Hi.
-My name is Emily Weber and I'm the machine learning specialist at Amazon Web services.
-Today we're gonna be talking about games on stage maker.
+My name is Emily Webber and I'm a machine learning specialist at Amazon Web services.
+Today we're gonna be talking about amazon sagemaker.
 I hope you enjoyed our previous two videos.
 First, we learned about notebook instances when we learned about using the built in algorithms.
 Now we're gonna learn about bringing your own model.
-This is really does so.
-First, there are many ways to train models on stage maker, right?
+This is your deep dive.
+First, there are many ways to train models on sagemaker, right?
 And so the 1st 1 is using the built in algorithms, but it just grows from there.
-There's also a technique called script moda.
+There's also a technique called script mode.
 You can bring your own docker container.
 You can leverage a solution on the AWS machine learning marketplace.
-Or you can just train a new notebook instance and this scenario we're gonna learn about options number 23 and four first off script mode.
-So script mode means that Amazon stage maker is managing a docker container that is an eight of us managed container that lives in the sea are already How do you want to write your own model?
+Or you can just train on your notebook instance and this scenario we're gonna learn about options number two three and four first off script mode.
+So script mode means that Amazon sagemaker is managing a docker container that is an AWS managed container that lives in ECR already How do you want to write your own model?
 That's pretty much the primary question you need to ask when you're using script mode and then you're gonna want to pick one of the open source containers that we are actively managing.
-So that's gonna cover mxnet tensorflow pytorch psych it learned spark ml and chain er we're going to be managing those containers.
+So that's gonna cover mxnet tensorflow pytorch scikit-learn spark ml and chainer so we're going to be managing those containers.
 You write the code for your model, and then you put it inside those containers, and then it can run on the sagemaker training jobs in particular.
-First, you wanna point to the AWS managed container of your choice, right?
-Your model, which could be a single file or a bundle of files.
+First, you wanna point to the AWS managed container of your choice, 
+Write your model, which could be a single file or a bundle of files.
 Specify your entry point within the sagemaker estimator, and so that's the location of your file.
-So if your file is sitting to directories above or if it's the name of the file and it's in the same directory, then just take the name of the file and then you'll just put that straight in thes sagemaker estimator.
+So if your file is sitting two directories above or if it's the name of the file and it's in the same directory, then just take the name of the file and then you'll just put that straight in the sagemaker estimator.
 Include any extra libraries that you're gonna have with the requirements dot txt file, and then when you use the script mode, manage containers, you're also going to get to use our Web server.
-So when you're interested in running inference with that model, you're gonna be all the leverage of manage Web server okay.
-When you bring your own docker file, this is what's gonna what it's gonna look like you're gonna import from the stage maker examples.
+So when you're interested in running inference with that model, you're gonna be able to leverage a managed Web server okay.
+When you bring your own docker file, this is what's gonna what it's gonna look like you're gonna import from the sagemaker examples.
 You can install any libraries that you need to you can run additional installations, and then in this case, there's a copyright.
-So there's a copy on mars dot are into optimal.
-And then this copy of plumber dot are into optimal.
-And so everything with inside stage maker is looking inside optimal.
-So it's gonna be looking directly within that location for your both your model and your inference code on then, in this case, we're specifying the entry point as Mars are.
-So just to walk through that when you bring your own docker file, that means you, as the customer are managing the creation of that container and the registry within.
-Easy are that means that you can write your model however you please.
-Ah, you want a point to your model within your docker file.
-You want to register that container on the c r and you want a point to your containers address in easy are within your sage maker estimator and then don't forget to implement a serve function So even if you're just doing the training, we're still going to check for a function that's called serve, and so make sure you have something implemented there.
+So there's a copy on mars dot R into opt ml.
+And then this copy of plumber dot R into opt ml.
+And so everything with inside sagemaker is looking inside opt ml.
+So it's gonna be looking directly within that location for your both your model and your inference code and then, in this case, we're specifying the entry point as Mars dot R.
+So just to walk through that when you bring your own docker file, that means you, as the customer are managing the creation of that container and the registry within ECR that means that you can write your model however you please.
+You'll want to point to your model within your docker file.
+You'll want to register that container on ECR and you want to point to your containers address in ECR within your sagemaker estimator and then don't forget to implement a serve function So even if you're just doing the training, we're still going to check for a function that's called serve, and so make sure you have something implemented there.
 Great.
 So we talked about script mode.
 Then we covered.
 Bring your own docker container.
-The AWS machine Learning marketplace is a way that you can access other algorithms to train on Stage maker.
-Both algorithms and models and algorithms means it's a set of code that you can train on your data set.
-A model means it's a pre trained model artifact and years gonna access it and then use it within your environment.
+The AWS machine Learning marketplace is a way that you can access other algorithms to train on sagemaker.
+Both algorithms and models and algorithm means it's a set of code that you can train on your data set.
+A model means it's a pre trained model artifact and you're just gonna access it and then use it within your environment.
 Both of those are available on a subscription model, and the good news for us is that there is absolutely a free tier, so you can absolutely check out some of the solutions for free.
 Many of them are gonna fall into a number of these categories.
-So whether that's image, audio vision taxed and there are over 230 solutions that are available on the AWS machine learning marketplace today.
+So whether that's image, audio vision text and there are over 230 solutions that are available on the AWS machine learning marketplace today.
 Okay, let's take a look at an example.
-So in this case, we're just gonna cruise down here, so I'm at the stage maker examples tab under advanced functionality in a select our bring your own And it use on that, we're gonna create a copy.
+So in this case, we're just gonna cruise down here, so I'm at the sagemaker examples tab under advanced functionality I'm gonna select our bring your own gonna hit use on that, we're gonna create a copy.
 And then same scenario.
-I'm just gonna enter on s three bucket here.
+I'm just gonna enter an s3 bucket here.
 So let's do this.
-How?
-We're gonna import stage maker, and then our bucket is gonna be saved.
-Maker dots session Stop default.
-Make sure that's looking good.
+We're gonna import sagemaker, and then our bucket is gonna be sagemaker dot session dot default.
+Let's make sure that's looking good.
 Great.
 Okay, then I'm just gonna run everything below.
-All right, So this is an example where we're bringing her own our model, and the flow is pretty similar.
+All right, So this is an example where we're bringing our own R model, and the flow is pretty similar.
 Were importing sagemaker.
-We've got her bucket intercession.
-Um, we need some permissions.
-I'm gonna open up the our model so you can see it.
+We've got our bucket and our session.
+We need some permissions.
+I'm gonna open up the R model so you can see it.
 And here's our new folder.
-And here is the our model that we're actually looking upset.
-Samara start.
-You'll notice that the prefix is optimal.
-Got her input output model path.
-Ah, channel name.
+And here is the R model that we're actually looking at.
+So that's mars dot R.
+You'll notice that the prefix is opt ml.
+we've got our input output model path.
+Channel name.
 We're gonna learn about that in the next session.
 And then here's our trading function.
-You've got our parameters.
-You've got our target.
+We've got our parameters.
+We've got our target.
 We're gonna read in our training files.
-He's got our model right here.
-Uh, then we're gonna fit it and right success.
+We've got our model right here.
+Then we're gonna fit it and write success.
 And there's also the serve function right here, and that's actually using plumber.
 And then just to check out the docker file.
-So we are pulling from the same maker.
+So we are pulling from the sagemaker.
 Example.
 Maintainer.
-Ah, installing those are based libraries, copying it into a Mel into optimal and specifying that entry point and then just to show you the estimate or hear about this example is running.
-So this is the set where it's actually publishing any CR.
+Installing those R based libraries, copying it into ml into opt ml and specifying that entry point and then just to show you the estimator here while this example is running.
+So this is the set where it's actually publishing an ECR.
 And then down here are the training parameters.
 So this is the actual image, right?
-And so it's actually within E cr Exactly.
+And so it's actually within ECR Exactly.
 Ah, here's our training cluster.
-Also gonna learn about in a second here rates then we call model that fit.
-So the real a couple pro tips.
-So again the three ways that we're learning about your script mode bring your own doctor filing she lory marketplace.
+Also gonna learn about in a second here Alright then we call model dot fit.
+So there we go a couple pro tips.
+So again the three ways that we're learning about here script mode bring your own docker file and machine learning marketplace.
 Certainly the the script mode is gonna be a lot faster.
-To train your own model, you are gonna be limits to those managed limited to those managed options.
-So if you need to maximize your flexibility, go ahead and bring your own doctor file.
-It can be a little bit more time consuming because you actually have to build that entire doctor file.
+To train your own model, you are gonna be limited to those managed limited to those managed options.
+So if you need to maximize your flexibility, go ahead and bring your own docker file.
+It can be a little bit more time consuming because you actually have to build that entire docker file.
 However, you can absolutely test it locally.
-Weaken task the creation of your doctor file on your notebook instance before actually setting it up Too easy are.
+So you can test the creation of your docker file on your notebook instance before actually setting it up to ECR.
 And then obviously on the machine learning marketplace, you can move very quickly.
-There are hundreds of options that are available on the market place.
+There are hundreds of options that are available on the marketplace.
 You can find one and get to use it right away.
-Uh, just remember that sage maker within the container is gonna read from optimal and definitely find an example that fits your needs.
-Whether that's using care, us tensorflow, mxnet pytorch or any use specific framework or scenario that you're looking at, find that example.
+Just remember that sagemaker within the container is gonna read from opt ml and definitely find an example that fits your needs.
+Whether that's using Keras, tensorflow, mxnet pytorch or any specific framework or scenario that you're looking at, find that example.
 Run through it and make sure that you understand how it works and then just modify it and it will absolutely work.
 So thank you very much.
 That's all I got.
-My name's Emily Weber, machine learning specialist at Amazon Web services.
+My name's Emily Webber, I'm a machine learning specialist at Amazon Web services.
 Thank you for your time.
-Go and check out our get help site.
+Go ahread and check out our github site.
+Amazon sagemaker examples.
