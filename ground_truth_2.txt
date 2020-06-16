@@ -1,0 +1,165 @@
+Hi.
+My name is Emily Webber. I'm a Machine Learning Specialist at Amazon Web services.
+And today we're gonna talk about Amazon SageMaker.
+I hope you enjoyed the last video where we looked at the managed notebook instances in this session.
+We're gonna learn about built in algorithms.
+So first off, particularly for the folks who are new to this whole business, that is machine learning.
+It's really helpful to understand some of the learning theory fundamentals.
+Right.
+So what What does this really mean?
+What are we really talking about when we're when we're looking machine learning.
+So if you ask me, we have a physical use case, right?
+And there's any physical use case that can be football players running down the field.
+That could be people walking into the stores.
+That could be drops of rain that are falling from the sky.
+Any physical use case, we're gonna collect data on that physical use case.
+In the best case scenario, we have that data natively.
+That data can live in our S3 buckets.
+It can live in our databases.
+It can live on a public data source.
+For example, a Chicago crime data set. we're gonna collect a data side of some type.
+We're gonna combine that data with some type of machine learning model and up front, we don't necessarily know which model is going to be best.
+We might have some intuition.
+We might have read a couple papers.
+We might have read a couple blog posts and have some understanding of which model is going to be best.
+But frequently there is a significant amount of experimentation that goes into the actual process.
+But so typically, we want our
+The combination of our model with our data set to literally reflect our real world use case.
+And so there's an intuition here, right?
+We want our data and our model to actually balance.
+If our model is too large, if we're using XGboost and we have too many layers of depth on a tree.
+Or maybe we're not using a regularization term that's actually keeping those parameters in check.
+Our model can get too large.
+And if our model's too large, but our data isn't also large and if our use cases also a little bit smaller, that model is gonna overfit right.
+It's actually gonna learn too closely that's not gonna be able to generalize very well.
+Conversely, if our data set is too large, if there's too much going on in our data set and our model's not large enough to be able to handle it, we're going to be able we're gonna underfit this scenario.
+It is a really helpful stop to know that you can actually collaborate with domain experts in order to get a good model.
+So if I'm building a machine learning modeling system, that's gonna be detecting fraud in telecommunications.
+It would be phenomenal for me to have fraud experts who know that telecommunications network in particular, the fraudulent phone calls that are happening on that network.
+They can tell me the time the day, the length of those calls, the nature of those calls, where they're coming from and where they're typically going.
+And all of those features, if you will, all of those columns tend to be highly correlated with fraud.
+And so what I'm gonna do with that information is turn around and put that into my model as features.
+So every piece of information that they give me, I'm gonna add that as another column in my data set and then plug it into my model.
+And so you can actually use that to collaborate with domain experts in order to get better and better models.
+So how we actually do this, right?
+So we start with a use case, we start with some problem that's that's out there in the real world.
+The first question I'm going to be asking myself is, What data do I have on this use case?
+Do I have fraudulent phone calls?
+What about banking transactions?
+Do I have images of ships that have actually been tagged.
+What data do I actually have access to?
+My second question is, what model should I use right out of the out of the whole tool kit of models that are available to me?
+What's the best one that I should really spend my time on?
+Also, based on the model that I'm going to be using, I'm going to be framing the problems somewhat differently.
+So There are different ways that we can think about the real world use case problems and then we're actually gonna map them to a machine learning based solution.
+And it turns out there are whole families of types of machine learning solutions and we can just use existing solutions in those areas in order to solve our use cases.
+And so each algorithm solves a type of prediction problem.
+And the next algorithms that we're gonna look at here are all of the built in algorithms that come with sagemaker.
+And each of those algorithms have different personalities, if you will different types.
+There are many characteristics that are the same across algorithms, but also some that are slightly different cause we're gonna learn about that in just a little bit here.
+So the first type of prediction problem that we want to know about is classification classifications is gonna compromise right Around 80% of the problems that you're actually going to see in the real world overwhelmingly scenarios that you're gonna find are classification.
+And so some of the algorithms that we use to solve a classification problem include linear learner XGboost k nearest neighbors and factorization machines.
+All four of those algorithms support classification in some cases, binary and multi class classification.
+And so that's really the first scenario that you're gonna look at.
+You're gonna think about your real world use case problem and wonder whether or not you can map it to a classification based solution.
+After that, we want to know about computer vision, right?
+And so there are three built in algorithms within sagemaker that are specific to computer vision.
+The 1st 1 is image classification.
+So that's gonna be your based on your resnet model, where we have a single image and we want to know what class that image falls into.
+So just classifying that entire image, we also have object detection.
+And so that's your your SSD that's gonna take a single image.
+And then, based on the training data, we're gonna have an actual box that's covering the content of that image specific to objects that you want to identify.
+So you use an object detection specifically to draw bounding box around the new images that you're running inference against, and then also semantic segmentation.
+Ah, when you need to actually draw pixel map.
+So for cases where you're operating self driving cars, it's really helpful to actually be able to know the difference between a cat or a sidewalk or a stop sign or a person who's walking across the street, right?
+We actually need that at the pixel level, so that's where semantic semantic
+Segmentation really comes in handy.
+Topic modeling.
+So if we've got a data set that's full of tweets, for example, and we want to cruise through that and figure out what the topics are within sagemaker, we have built in algorithms that you can use to build your own topic modeler.
+And that's latent dirichlet allocation and neural topic modeling, working with texts.
+So for those of you out there who like natural language processing we're gonna have algorithms that are gonna be able to natively support text and so that's called blazing text blazing text has two modes.
+One is supervised, which supports classification, and the other one is unsupervised.
+And that's just gonna get embeddings.
+Embeddings are a phenomenal way that you can add intelligence to your machine learning projects.
+So rather than just having single vectors of all of your different attributes that are usually pretty sparse, right with all of your zeros, you can actually bring those down to a single fixed length word embedding that you can feed into another machine learning model.
+And what's nice is that those embeddings are all interrelated and so blazing text can actually understand the contextual meaning of those words.
+So a lot of people are familiar with TFIDF scoring or a bag of words or even count vectorizing. 
+Word Embeddings is like another step on top of this where we're actually learning the contextual representation of each word.
+Pretty cool stuff.
+Recommendations.
+So if you want to build a recommender system that's looking at movie data or music data or e-commerce, then go ahead and check out factorization machines that's gonna handle cases of large scale data sets really, really well.
+When you want multi class classification outside of your factorization machines go ahead and feed that directly into a cannon.
+So factorization Machines is actually going to produce these two latent matrices.
+You're going to take the results of that from your S3 bucket, which is the model artifact after your training clusters come back down and they're gonna feed that directly into your k nearest neighbors algorithm, which will then give you multi class classification.
+forecasting.
+So when you have time series data sets in particular that are related to each other, and that run over long periods of time.
+So if you're trying to predict the stock market or energy levels in solar forecasting or any other type where you have a running variable and you want to capture the interrelationship between those running variables but then add on other data sets.
+So lots of people are familiar with the ARIMA models or the GARCH models that are actually looking at a single variable in how they change over time, that's all awesome.
+But with DeepAR we're actually letting you add other variables to that.
+So whether that's categorical variables, or other other continuous variables, you can add all those in and then use a deep learning model that's actually running recurrent neural networks.
+You could check out the paper on this.
+It's awesome.
+It's actually a long short term memory model that's passing in the information from the from each point in time to the next one.
+It's really interesting anomaly detection So There are two built in algorithms that support anomaly detection.
+The 1st 1 is gonna be random cut forests, and this is an unsupervised algorithm.
+So random cut forest is best where you want to find anything that looks anomalous, right?
+You're passing in any type of data set and you just want to find something that looks a little bit odd.
+If you have something really specific in mind that you're trying to find within that data set, go ahead and pick classification algorithm, right?
+If you're if you're expressly looking for fraud in credit card transactions, definitely check out, XGBoost or linear learner because both of those are supervised algorithms and so they're going to do a great job of finding something that's expressly there.
+Whereas random cut forests is gonna be more general.
+Anything that looks odd IP insights is designed for handling IP data.
+All right, clustering.
+So you're gonna have both k means and k nearest neighbors that are gonna be able to operate clusters with your sagemaker built in algorithms sequence.
+Translation is going to let you take in various sequences and then literally translate them.
+So the scenario for this is when you're using a when you want to build your own language translator.
+So if you're going from English to German, you'll just basically line up the pairs, so single like a single sentence in English and how it translates to another language to another sentence.
+In German and then your neural model is going to go in and learn the differences between those two and how one maps to the other regression.
+So when you need your algorithm to generate not a binary or a discrete outcome, but actually continuous.
+So if you want to know the number of remaining useful life cycles you have on an engine set, or if you want to know exactly how much you're expecting to gain in your in your profit and loss for the next couple months, you can absolutely use regression in order to the regression as machine learning technique that generates a continuous outcome are rather than a discreet or binary one.
+In the case of classification and then, lastly, feature reduction So When you have a large data set, you need to break that down.
+So if you're looking at anywhere over sometimes 15 or even hundreds or thousands of columns and a single data set, you can plug that into an algorithm called principal component analysis.
+That's actually gonna break that down to the sub components.
+And now This is an unsupervised algorithm.
+So you're not expressly telling it what the core components are, but you do need to tell it the number of components that you want it to break down to.
+And so it's gonna find those components using Eigenvalues and Eigenvectors.
+But you just want to run a couple experiments until you see the actual right number of components that are composing your data set and then object2vec is another technique to that is feature reduction, but also uses a couple other techniques that's gonna take in lists and then generate embeddings with those lists and actually gives you a supervised comparator so you can see whether or not two Types of incoming data fields are similar and so machine Learning, It's important to say, is really fundamentally a research discipline, right?
+So if you could make a compelling case for why you should use a certain type of algorithm for a certain type for a different type of product or a different type of problem, by all means do that right.
+By all means, be creative.
+Take that algorithm and play with it, do something different with it.
+But by and large, these are typical ways that we see customers using the built in algorithms.
+And again, classification tends to handle the overwhelming majority of scenarios you're gonna come across.
+Okay, so the built in algorithms within sagemaker, you want to know a couple things.
+So first off, those exist in the elastic container registry.
+So every AWS account is gonna have access to sagemaker if it's if it's enabled.
+And then the algorithms actually just live in ECR.
+Right?
+So it's a fully managed container that the sagemaker team is putting their code inside.
+And this is a docker container that they're actively maintaining.
+On top of that, these are versions.
+So the team is always gonna be pushing out the latest version of a given algorithm, and you can just select which version you want to.
+If there's a previous version that you like, you can just roll back to that.
+And that's exactly how you're going to get your container right?
+That's a single function within sagemaker.
+Okay, so some pro tips for you.
+So Step one is actually read the white paper, right?
+So So each built in algorithm is gonna have a white paper that's associated with it.
+Most of these you can find in the sagemaker documentation.
+and others you can just find online.
+It is incredibly valuable to actually download the white paper that is specific to your algorithm and give it a read the first time you read through it.
+There's probably some percentage of the content that we won't be getting, and that's okay.
+The next time you check it out, you'll get slightly more, and then the next time you check it out slightly more.
+After that, reading a white paper is a really helpful way of formalizing our knowledge about a specific algorithm.
+So that means that we understand some of the math that's associated with how that algorithm actually operates.
+But it also means that we understand some of the assumptions about how the features are gonna be applied to that algorithm and also what types of transformations we need to do to that data set in order to get the best performance in our model.
+So definitely check out those white papers there really valuable source of information.
+Also, when you are running supervised data sets inside of your sagemaker built in algorithms, make sure your label is that first column so that is expressly assumed so in XGBoost.
+For example, when you're loading up a data set, make sure the why column is your 1st 1 Also, take a look at some of the hyperparameters.
+We're gonna take a deep dive on hyperparameter tuning when we learn about the training and tuning jobs.
+But essentially look at each of the hyperparameters for your built in algorithms and start to gain some intuition for how the changes in your hyperparameters will affect the changes in your objective metric.
+And then, lastly, many of your algorithms in the built in case are implemented within mxnet, so you can absolutely take that model artifact.
+Write your own mxnet code and then run inference anywhere you like.
+That's it.
+Thank you very much.
+My name is Emily Webber.
+I'm a machine learning specialist at Amazon Web services.
+Thank you for your time and go ahead and check out our github site at Amazon Sagemaker examples.

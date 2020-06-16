@@ -1,0 +1,249 @@
+Hi.
+My name is Emily Weber.
+I'm a machine learning specialist solutions architect at Amazon Web services.
+And today we're gonna learn about Amazon Sage Maker.
+I hope you've enjoyed some of our previous Woody videos.
+We've learned about the manage notebook instances we learned about using built in algorithms.
+We learned about how to bring your own.
+And now we're gonna learn about the training and the tuning jobs.
+This is your deep dive.
+So first, a key point.
+We need to learn every single model that's running on a stage maker.
+Training job has its own cluster.
+This is an ephemeral cluster of a single ec2.
+Instance.
+Sometimes multiple.
+Easy two instances.
+That means you have a dedicated, easy to instance that is alive for the number of seconds that your model is training.
+So this means that you can develop on one easy to instance and then literally train another easy to instance.
+And so, if you have multiple machine learning models that you want to run and if they conflict in any capacity, you can have dedicated easy to instances for each of those in particular.
+This cluster is gonna come down immediately after your model finishes training, which is going to save you a ton of money at the end of the day.
+In particular, it means no more virtual environments, no more conflicting package installations and no more resource dependency.
+Right?
+So you're actually not gonna get shot down if I have a team of 25 data scientists.
+And if all 25 of my data scientists are trying to go after the same cluster, you're just gonna run into issues, right?
+It's just gonna be tough if everyone is trying to use those cores trying to use the memory.
+And if they're all using different versions of Python, different versions of open source packages.
+It's really challenging to manage that.
+Andi.
+Some people want to try new things, and that's good.
+That's a core part of being a machine learning scientist is knowing about advancements in our field and then using those advancements.
+And so if we're tied down to our resource, is in particular if I try something new, but it shuts down the rest of my team because I actually took out that cluster, it's gonna be tough.
+But on stage maker, each individual person not just has their own cluster, but they have as many clusters as they want to use.
+And as you're gonna let them use based on the limits, that direction going to set for that account s Oh, that's that's good news.
+That means we can scale out or training jobs.
+So in particular how these training jobs work.
+So you have an estimator.
+We have a stage maker.
+Estimator on that estimator is gonna take a configuration for these active resource that we want to use.
+So that's the number of E.
+C two instances that is dedicated to your train job.
+That is the type of those easy two instances, and that is the size of that EBS volumes sitting on that instance.
+So I want you to really think about this for a second here.
+So if I'm training on 20 gigabytes of data relatively large set 2020 gigabytes of data, I need to make sure that my volume size has at least that much right and probably a little bit more.
+Also, If the model that I'm gonna use on that training cluster is going to be fairly large, I'm also gonna want to increase the size of my instance because I am going to run it issues if I don't set those up.
+Also, if you're using some of the latest easy to instances and you can move really quickly with your compute, you can actually reduce the total time of your training job.
+Definitely something to think about.
+So again, that is your algorithm container.
+So that container we learned about all the places that can come from that can come from a built in algorithm that can come from you when you're bringing your own either script mode or doctor container, or that can come from the machine learning marketplace.
+In all those cases that's gonna live in E.
+C.
+R.
+You're gonna have that execution roll right, And that's the role that's associated with that exact notebook.
+You can go in and attach extra policies if you need Teoh, and then that's her stage maker.
+Estimator on these core components are gonna be constant across almost every Sagemaker training job you're going to see you're going to need an estimator.
+They're going to need that image, your execution roll, your estimator, your session, all those good things.
+Okay, There's also another topic that we need to know about which is splitting our data for machine learning.
+So let's say I have a data set and it's full of everyone in my hospital who has diabetes.
+And so maybe some of the people do have diabetes, but some people don't.
+And what I want to dio is use a machine learning model.
+So tank, that data set and then tell me who else is likely toe have diabetes.
+And so that's a pretty standard supervised learning problem where I'm just gonna get my axes and wise and plug that into a model.
+This is gonna work.
+However, by splitting my data, I'm going to start with a data set of That's basically everybody all together, right?
+I've got all my columns and one column is whether or not that person has diabetes.
+After I've done all my future engineering, I'm gonna split that into a train validation and tasks set.
+Most commonly, the training data set is gonna be anywhere from in low cases.
+60% upwards, more like 80 or 85% in some cases.
+So is most of your data, right?
+Is gonna go into that training set.
+Then you're gonna take a portion and you're gonna call that your validation data and you'll take another portion called on your test data and then we're gonna fit our model on that training data.
+But then we're gonna look at the performance of that model on our validation data.
+And usually we're gonna perform a technique called hyper parameter tuning on our validation data.
+And then once that's done that we're going to see how well the model has done on the test data.
+And that's how we can see the objective of meth theory Jek tive performance of our model.
+Okay, so for all three of those different ways to split our data set were going to send those up to sage maker in what are card channels.
+So we can have a train validation and Tasked channel, and both of those need to be as three locations.
+So actually, just a copy our data back to us three before we send it up to stage maker.
+So we call it staging or features, um, and that so that we can get all the version ing all the collaboration and all the availability that we get with storing our data in That's three and many of the stage maker python STK methods are actually gonna write that data to us three for you.
+So if that's a single function, you can just send that out, right?
+So then we call Modeled outfit, right?
+And so the way we always call Modeled Outfit except what's happening is that a new cluster is coming online, so it's a new easy to instance, and a few minutes after that's up, you're going to send the logs out to Cloudwatch.
+So we're actually gonna see point by point in time what the metrics on your model are, how well it's training, what the throughput is, what your CPU utilization is, Um, and then you can monitor that performance me, the console or through a notification stream.
+So once we've trained our model, we need to evaluate it on a common way of evaluating your model is with what's known as a confusion matrix.
+And so the confusion matrix is gonna take your label data and the predictions that are coming out of your machine learning model, and both of those are gonna be broken up into positive and negative cases.
+So when your model predicts positive and you're labeled data is positive.
+We call that a true positive.
+When your model is predicting negative and you're labeled data is negative.
+We're gonna call that a true negative.
+Both of those cases were good, right?
+That's where your models and value its operating as expected.
+Over here, when your model is predicting negative at, but you're labeled, data is positive.
+So you're actually missing one of those cases In this case, we're gonna call that a false negative.
+And then down here, if your model is predicting positive but your label data is negative, we're gonna call that one a false positive.
+So both of those are not so good, right?
+Those are cases where our model is not operating as expected, and we need to improve the performance there.
+A few extra techniques we can use to do them.
+Ah, there's a term we want to know about.
+And that term is recall.
+Recall is literally the number of true positives you have over all of the positive cases that are in your data set.
+So it's literally how many positive cases you're catching eso In my diabetes case, that would be whether or not I can catch all of the people in my hospital who actually have diabetes over here is another term that's called precision and precision also starts with your true positive, but it's literally true positive rate over all of the predictions that are coming out of your model on the positive side.
+And so in that case, in my diabetes model, I would have great precision if every time my model predicted positive, I actually found someone who had diabetes.
+But if I missed everybody, I would have bad recalls.
+And so those are two different ways that you can weigh the performance of your model, and in particular, we're gonna want to use both of those terms with hyper parameter tuning.
+And so let's let's dive in here so hyper parameter tuning eso first off a parameter that's generally the features that are going into a model.
+So that's the actual data that's being supplied to your model.
+That can also refer to some of the extra terms.
+A hyper parameter typically refers to extra math, if you will.
+It's extra terms.
+It's knobs that you can supply.
+They're just really numbers.
+The real numbers, whether that's the maximum depth of your trees or the learning rate of your deep learning models.
+And then the tuning basically refers to trying as much as you can, right?
+So that's that's running a large number of jobs over time we start to gain were intuition about which hyper parameters perform better under certain settings, and so eventually there's a little bit less of guessing check.
+But it's helpful to be able to just do this.
+Let's go.
+And so when you're performing hyper parameter tuning and EMS on stage maker, there a couple steps.
+First thing you want to do is pick the hyper parameters you're looking for and the ranges on those hyper parameters.
+So I'm trying to tune, actually boost.
+I'm going to select four hyper parameters.
+In this case, eight of men child Wait Alfa and Max steps, and then I'm also gonna get the ranges on those.
+So whether it's a continuous or an interviewer parameter, I need to know, and then the specific ranges on those guys all that is available in the sagemaker documentation.
+After that, I need my objective metric.
+And so my objective metric.
+That's just the term that I'm gonna use to understand how well my model is performing.
+We're gonna pull that objective metric from one of your channels and it's never the training set, right?
+It's always either the validation or the test set.
+And that's all that.
+We know that your models actually learning something beyond what it was Presley trained on.
+And so in this case, we're going to get a you see on a validation data and you see stands for area under the curve, typically under the receiver operates.
+All right, that we're gonna pick our job parameters.
+And so we've got our estimator.
+We know the objective.
+Metric.
+We know arranges.
+Basically, we need to tell sage Maker the total number of jobs we want to run.
+In this case, we're going to run 20 jobs.
+Also, the number of jobs in parallel that we want to run.
+And so once we're finished, it's gonna look like this actual on the X axis, We're gonna have time.
+Ah, y axis is gonna be objective.
+Metric.
+And so, for each point in time, Sage Baker is going to be training up to three models for each point in time, and each of those three models are gonna be pulled or evaluated on their objective criteria.
+And so in this case, a usti starts at 50% and goes up to 78 then a little bit higher.
+So in that first passage makers training three models at a single point in time, it's gonna pull the results from the objective criteria.
+And that is gonna go into a Beijing and Optimizer that's going to go into a basin and infant.
+Sir, that's actually going Teoh suggest the next best initialization is for all of those hyper parameters.
+And so that's that next point in time when three more models are getting initialized, and so you can say that on average that performance starts to go up, and that's where we're seeing an improvement on our model.
+But then it starts to come down, and that's what our models actually over fitting.
+And so that's where will typically apply regularization term or just use a smaller model toe helps prevent that over fitting, and so let's see it in action.
+So over here on our consul, this is from the sagemaker examples.
+This is the hyper parameter tuning direct marketing with actually boosts, and essentially I am the same is always just gonna run all on this.
+Just we can see it.
+But the flow here is really similar, right?
+We're gonna import stage maker.
+Got the different types of tuners that we need.
+Well, we got our bucket and a roll.
+Ah, this is still gonna be downloading a data set.
+So this is from you.
+See, I and we're gonna take that data sent, and we're gonna load it into Ah, Pandas, of course.
+Ah, so that's a pd dot reid sci fi.
+So here's our data set and then over on the right hand side, that's are Why column, Right.
+That's the target.
+And so in this case, this is a direct marketing.
+So these researchers called physical homes in Portugal and actually asked people if they would open a bank encounter.
+Not most people overwhelmingly said no.
+Some people said yes.
+Ah, and so that's why you see the difference between nos and yeses.
+And then our researchers are gonna put this into a model to see if they can figure out who is most likely to want to open a bank account.
+And so some analysis on this right, they're gonna clean the state of set up as we do in some capacity.
+Ah, they're dropping some some terms here.
+They're splitting in writes that that train validation and test then they're going to concoct it.
+So, um, we're putting out why Column First thing The copy back.
+Test three.
+Here's the set up on the hyper parameter tuner, right?
+So where we've we're getting our image.
+So that's where we're actually getting actually.
+Boost, right?
+It just lives in D.
+C.
+Are we've got a container.
+There's our Easter two instance Conflict eggs were running on one and four XL.
+Ah, here.
+The hyper parameters that we're gonna set.
+Hear those ranges right?
+So Aidem Men child, wait, Alfa etcetera.
+Objective Metric.
+That's that validation.
+And you see, here's the tuner and then we call to not fit and it's a progress.
+Let's even the console.
+It's under tuning jobs.
+Looks like we have a new tuning job that just started.
+Um, so that's her status on this is running.
+So we have three models that were actually initializing, and so each of those models we can drill down into I'll on Let's see the status on this, right?
+So it's still just propping the instances So still just getting going here.
+So I'm gonna go to a previous tuning job.
+Um, that was done successfully, and I want to show you a single training job.
+Just you can see it because there's a lot to know.
+Eso that's our status on this previous job.
+Download the input data, the training image complete in, and then we want to know how to check the logs on this.
+So down here under monitor, we can hit view logs that's gonna put us over the cloudwatch.
+And then cloudwatch is going to tell us that point by point.
+Ah, read in time in terms of how well our model was performing.
+And so, you know, for each point in time, this is our tree.
+That's that's getting pruned by the booster along with our validation.
+And you see, and it's it's performing.
+Doing well.
+Um, and so what we can dio is get the name of that tuning job, right?
+So I'm just gonna copy the name of that job that ran previously and a cruise over here.
+I actually need the name of that example, which is right over here.
+So we're gonna check out sagemaker examples and then down here under hyper parameter tuning in an analysed job results.
+So let's it use.
+We'll create our copy.
+And then just in this herself, I'll get rid of this snail paced in the name of that tuning job.
+Not that bad.
+So run.
+All okay.
+And so this is going to tell us that for that hyper parameter tuning job, we ran 20 training jobs.
+They've all completed our best model has a validation A you see of 77%.
+Then we're actually gonna grab through cloudwatch logs and call this beautiful function tune or not, data frame.
+Um, and this is what tune in our data frame is gonna give us.
+Those thes are the models that we trained these air, all the 20 jobs that we rim Each of those is gonna very based on the objective metric, the training time.
+Ah, hyper parameters over here.
+And then we can use this function that's built in, and then we just get a nice little chart, right?
+And so this chart is just gonna tell us about how those models actually ran.
+So here, those three models, along with their objective criteria on, then another initialization and on and on.
+And so again, um, sage maker is using a basic and optimizer You can also use random search, um, in order to find the best models.
+And so here we go.
+And then you can also break it down based on the correlation between the changes in your hyper parameter and the changes in your objective criteria.
+So ah, couple tips to close this out.
+You need your s three bucket to be in the same region as your training job.
+Hard and fast men date.
+You will run into errors if you don't do that.
+Definitely used sage maker surge to compare the results of previous jobs at your room.
+So most commonly from starting a new project, I'm going to create a bucket with the name of that project.
+And then I can use sage maker search just toe list all the training jobs that had an S three, your eye with my bucket, and then that's gonna tell me the results of all those jobs Definitely run training jobs in parallel from your notebook, right?
+So you don't have to wait for one job to have run previously, get a loop and then map.
+Reduce that loop through all course and you can save a lot of time.
+You can set the number of instances, so that's a soft limit.
+You consent If you contact your team, your your accounting, you and then definitely check the documentation on which hyper parameters are valid for tunings.
+Ah, and you can also use the tuner for bringing your own algorithm again.
+Whether that's doctor or script mode.
+Just said you're hyper parameters as a Jason object.
+Thank you.
+Ah, my name's Emily Weber.
+I'm a machine learning special solutions architect at Amazon Web services.
+Thank you for your time.
+I hope you enjoyed learning about training and tuning jobs.
+Definitely check out our get hub site.
+Amazon Sage Maker Examples for more information.
+Thank you.

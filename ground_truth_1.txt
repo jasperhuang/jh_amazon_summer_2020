@@ -1,0 +1,228 @@
+Hi.
+My name is Emily Webber.
+I'm a machine learning specialist at Amazon Web services and today
+We're gonna talk about Amazon SageMaker
+Amazon SageMaker is a fully managed machine learning service that developers and data scientists can use to build, train and deploy machine learning models.
+Today, we're gonna talk about notebook instances and this is your deep dive.
+So with the notebook instances on sagemaker, it all starts with a notebook, right?
+And within the notebook, it starts with your ec2 instance.
+Your ec2 instance that's your elastic compute cloud.
+That's your virtual machine that's going to spin up and let us do all of our processing.
+This is a managed, ec2 instance.
+That means that even though we're turning it on and off, it's not gonna show up.
+Under our ec2 console, and we're not gonna have ssh access to this machine.
+It's gonna be fully managed by Amazon.
+We want to pick the right family.
+Your ec2 instances gonna come in many different shapes and sizes.
+And there are families of ec2 instance.
+T is the tiny that's the smallest, most frugal, most humble option, M is slightly larger.
+That's gonna have more memory.
+And more cores, C is compute optimized and P stands for GPU.
+After that, you're gonna want to pick the right size, and this is gonna range anywhere from medium to very, very large.
+You can have a lot of flexibility with selecting the right size on your ec2 instance.
+Also, you want to pick the right version.
+So every version of an EC2 instance is of the latest version that's been produced by the team.
+So that three that's highlighted that stands for the most recent version in the T family.
+The large number means that it came out more recently and the latest version of an EC2 instance is always gonna be more cost optimal.
+After that, we're gonna want to add an EBS volume.
+And so again, Sagemaker is a managed service.
+So this EBS volume is also not going to show up on your EBS views, however, Sagemaker is gonna be putting these two things together for us.
+An EBS has a really special property.
+That property is that it's gonna be able to store data for us.
+So we want to get the size right by default.
+You're gonna get five gigabytes.
+However, if you're working on a machine learning project that has more than five gigs which many, many machine learning products do have more than five gigs.
+We're gonna want to pick the right EBS volume for you.
+And typically, I do slightly more than the amount of data that I actually need.
+I'm not trying to have a large volume and then be charged for it, But you want a little bit of breathing room, So So pick something that's slightly larger than what do you actually need?
+And then on top of that, remember that everything on that EBS volume is gonna persist.
+So, you know, even if we turn our EC2.
+Instance on and off for example when we go home at the end of the day, in order to keep our costs down, we still want to hold on to that data set, and we want to hold onto our code, and both of those are gonna live on EBS.
+We also want to add or create a git repository.
+And so those repositories are gonna give us access to all of our code.
+It's how we're gonna share our code with other developers and data scientists and within Sagemaker, you can add, git repositories that are automatically installed onto notebook instance, when it's created after that.
+A few more settings.
+So we have security settings.
+This is gonna include topics like encryption.
+If we're working with extremely sensitive data, we want to make sure that it's encrypted properly, including root volume access to our instance.
+So if we need to shut that down under secure settings, we certainly can.
+Internet access is another component.
+If we want to disable Internet access, we've full capacity to do that.
+In addition to connecting our notebook instance to our VPC so that it's locked down within that virtual firewall.
+Also, we have the option of using a lifecycle configuration.
+Your life cycle config is a bash script that's gonna run every time you start or create a notebook instance, and it's just a bash shell so you can git clone.
+You can pip install.
+You can copy data from S3 that is gonna have a time out of right around 15 minutes.
+And so if you are installing a package that takes longer than that time out, go ahead and drop in an ampersand in the lines so that it actually runs in background of your notebook instance.
+After that, if you want to run a machine learning model on that notebook instance, we're going to cover all of the five ways that you can train models in Sagemaker locally is just one of them, but you certainly can.
+You can attach a portion of a GPU to that EC2 instance, and that is a new instance size that came out a new instance series that's called elastic inference.
+And this elastic inference is a portion of a GPU that you can attach directly to your EC2.
+Instance in order to run inference locally, and you're gonna wanna select that based on your size version and bandwidth after that.
+So you got your notebook instance created, and then you'll click the button that says, Open jupyter, and that's going to take you to this page.
+If you're new to jupyter, we're gonna walk you through some of the features here.
+So first off, that is all of your data.
+All the folders, all the files, all the content that you wanna actually, process is sitting right there in that list format.
+That fourth tab in from the right those are 200 example, notebooks that are managed by the Sagemaker team.
+Those are actually coming out directly from us in order to show our customers features that they need to know about.
+So if they're interested in understanding how Sagemaker is gonna handle training machine learning models using R or using keras, or PYTORCH or any other capabilities in addition to distributing data sets what about putt mode, all of those examples are in that folder also over on the right hand side, there's a new button.
+You can select the new button and then cruise down to create new notebooks and terminals.
+We're gonna learn about the terminal feature right here.
+So on the right hand side, you select new and then down on the left hand side, you're gonna select create a new terminal, and then this is gonna open up your view.
+And so the terminal that is something that exists within every Jupiter environment that folks are gonna use.
+However, many of us weren't necessarily aware of it prior to using Sagemaker because the most common polices to develop Jupiter's based solutions are either on a desktop or there on a server.
+And if they're on a desktop.
+We typically already have a bash shell that's already opened up.
+So we wouldn't even need to see it within that desktop view.
+And if it's on a server than typically will have a putty or some type of other ssh connection that's actually getting us access to that server.
+And so in that case, we also have a separate terminal view in this case, within the Sagemaker notebook Instance, your terminal is really valuable because it lets you see what your instances actually operating out on a line by line basis.
+So rather than the notebook view limiting you, you condone drop all the way down to the basho.
+Your EBS volume is going to start at that Sagemaker word, right?
+So you actually need to CD into Sagemaker to get onto your EBS volumes.
+And again, that's where your data is actually gonna be persisting.
+Okay, so, uh, again 200 example notebooks definitely use these.
+So on the left hand side, we're gonna see all of those folders.
+Those folders are working out over different cases of applying machine learning different types of machine learning algorithms.
+Using are different types of data distribution every time you selection of those.
+Just go ahead and hit use and then create a copy.
+And that's actually gonna copy the files that you need to have into the home directory of your Jupiter notebook.
+And then all of those example No books are open sourced its on the right hand side, those air a Github.
+That's a Github site that's full of those 200 plus examples.
+Okay, so when you open up a single notebook, this is what it's gonna look like.
+First off, we have cells.
+This is a cell.
+Each cell is gonna be broken down into either markdown or code, and you can see that right up there with that dropped on bar.
+A couple of their options those the two main ones markdown is gonna make your code look really, really nice.
+So you can get nice headers and night list views.
+But when you need actual code, just switch that down in the top right hand side of your notebook.
+You're going to see the actual colonel that you're running on and your kernel is a way of executing code, right?
+So it's either python and three or two or are if you've installed it or in a condo or any of the other capabilities that you're gonna need and all those they're gonna come with your Sagemaker.
+Notebook instance.
+And if you need to switch out your colonel, go ahead and do that.
+You've got the cell tab over there at the top, and you can also change it.
+So if for whatever reason, one of your variables gets destroyed because you're doing some awesome feature engineering technique that was a little bit tough.
+Go ahead and switch out your kernel and you'll be good in no time the next piece we want to know about.
+So we're gonna need to import the Sagemaker python SDK.
+So again, that's an open source library that the Sagemaker team is developing in order for us to use the methods that they've built.
+Ah, that's gonna include getting the execution role that's going to use an STS service that's actually grabbing the I am policy that's associated with our notebook and then is giving Sagemaker access to our S3 bucket.
+We're gonna have our Sagemaker session.
+We're gonna have our default bucket, and so the default buckets that is gonna live inside of every account it's gonna be created when you run that line.
+If you want to use your own bucket, go ahead and just paste in the name of the bucket name.
+It definitely surprised me the first time I started using Boto3.
+But I definitely grew to like it because so many of your services you can just get to using methods are dirty built in.
+So you just need the name of your S3 buckets.
+Let's check out an example.
+This is our AWS console.
+This is where we're gonna look at all of our services on the top of right hand side.
+We're gonna have the region that we're operating in.
+That is a physical location in the world where services are going to be a belts maintained and stored.
+And so let's make sure we're in North Virginia.
+That's my default.
+Then we'll cruise down and will select Amazon Sagemaker.
+Go ahead and type it in the search bar if you need to find it, and then that's going to take us to our dashboard.
+The dashboard is going to tell you about ground truth labeling jobs.
+You performed notebook instances, training jobs and inference capabilities that you'll need Let's elect notebook instances.
+Let's cruise up to the top of right hand side where it says create a notebook instance.
+Go ahead and type in a name for a notebook instance and then, under instance time you'll see that there is a wide variety of EC2 instance that we that we can pick from, and this is where you can get really flexible with your instance, where you can absolutely start with something small.
+Start with your your teeth three.
+Medium, but then you can bump up.
+You can absolutely upgrade on bits.
+Fun, because you can do this on the fly.
+So after you've started running her notebook instance, and then suddenly you realize that you need more memory or more processing.
+Go ahead and bump up your EC2.
+Instance.
+We'll leave this at the at the T two medium.
+You got your elastic inference.
+You can just attach that as necessary additional conflicts.
+So this is your Bash script, right?
+That's that lifecycle conflict that's gonna run every time you create or start a notebook.
+Instance.
+And then here's your EBS volume.
+You can just specify any type of ups volume size.
+You're looking for the Max is 16 terabytes.
+Here's your execution role, so that's going to give you access to the services.
+Ah, here's where you can enable or disable root access.
+You could encrypt your notebooks.
+You can operate them securely using the VPC and you can attach to get repository.
+I already have a noble created.
+Well, check this out.
+This is that home view on the top of right hand side.
+And that's where we can create a terminal I'm gonna cruise up to Sagemaker.
+Example.
+So this time, right here.
+That 4th 1 again.
+Wealth of information.
+Uh, in the first bar introduction.
+Amazon algorithms.
+Let's cruise down and select text classification TVP dia go ahead and hit, use and then create a copy, and that's gonna take us over here.
+Then we've got a couple different options for running through this lab.
+Every cell, which you'll see, we can switch out from markdown to code.
+Believe as is.
+If you want to run a single cell, the keyboard shortcut is shift.
+Enter.
+Here we go.
+So that's that's a single cell.
+However, if you want to confirm that all of the cells in your notebook are operating properly, go up and undersell, select, run all.
+And then that's just gonna run through every cell in your notebook, and this is gonna let you understand how this example operates.
+And so you see that empty space.
+So that means the cell hasn't been run, the wallets running.
+There's a little ass trick that shows you that it's processing.
+And when it's finished, you got a digit.
+That's the order in which that cell has run.
+And so you'll see in this first cell, this is we're importing Sagemaker.
+That's the python SDK.
+We're getting our execution role.
+We've got our session.
+We've got our default bucket, and this scenario, we're actually going to be copying a data set from the Internet s.
+Oh, this is from Sarraf.
+He's the author of the blazing text algorithm, and we're gonna be getting this data set from Hiss site and then we're gonna cruise down.
+And in this case, um, were getting a d v p A set s Oh, this is coming from Wikipedia.
+There are 500,000 articles and all those 500,000 articles air tagged based on what category they fall into.
+So that's either author or company or means of transportation or a natural place.
+14 different categories.
+Um And so here is the actual training data, as we call it.
+So each row is Ah, sample from that data sent.
+We've got the class right up here.
+Then the title of that article along with the abstract.
+And so these are the different 14 classes that we're looking at.
+Ah, here's a quick little mapper that's just going to create basically a hash map from the index face to the string.
+And then here we're gonna do some feature pre processing.
+And what I like about this example is that we're doing this pre processing in parallel on the notebook instance so even know, even though we only have two cores on that t three medium, we're going to be running our data through both of those cores using a map produce.
+And the colonel makes it super easy.
+Eso here is that single function right that takes a row, runs through the transformation, doing somewhere token izing blazing text.
+You do need this little label here, um, little string specifications.
+And then here's the actual map produce s we're reading in all that data, depending it to this structure.
+Ah, calling Shuffle Keynote.
+Here.
+You do typically need to randomly shuffle all of your rose.
+Most algorithms.
+We're gonna assume that your data is gonna come in in a random fashion.
+Ah, you're only gonna keep a percentage of those rose.
+Ah, Then this is a count on the number of cores that are in that T three medium.
+Then we're gonna look at the actual function along with all of our data structures.
+And then the results from that is or transformed Rose.
+Right, So that comes out.
+Andi, here we go.
+And the rest will look at in the next section.
+I hope you like the demo eso some some pro tips here.
+So the 1st 1 is keeping your costs low by highly relying on lambda.
+Right?
+Lambda is your friend.
+Ah, lambda is event driven processing, so you can keep it off of of the time of day.
+You can keep off oven, upload S3.
+You can keep it off of a notification that's coming in, but definitely use lambda to turn your notebook instances off when folks aren't using them in order to keep your costs down.
+Point number two resize on the fly.
+So in this case, we were able to run all over processing with just that tea through medium.
+But let's say we wanted to use all that data, right?
+Not just a fraction we could actually increase that notebook instance.
+You just go ahead and select stop on your notebook instance and then edit your EC2 instance, or the EBS volumes.
+Both of those will recreate.
+Ah, the multi threading we talked about.
+Definitely nice feature.
+And then that execution role.
+Keep in mind how you're actually attaching new policies to that execution rule.
+And so that's it.
+Thank you very much.
+My name is Emily Weber.
+I'm a machine learning specialist at Amazon Web services.
+I hope you enjoyed learning about notebook instances.
+Go ahead and check out our get hub site.
