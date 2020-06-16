@@ -222,7 +222,7 @@ And then that execution role.
 Keep in mind how you're actually attaching new policies to that execution rule.
 And so that's it.
 Thank you very much.
-My name is Emily Weber.
+My name is Emily Webber.
 I'm a machine learning specialist at Amazon Web services.
 I hope you enjoyed learning about notebook instances.
-Go ahead and check out our get hub site.
+Go ahead and check out our github site amazon sagemaker examples.
