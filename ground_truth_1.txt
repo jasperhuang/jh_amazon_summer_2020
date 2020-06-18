@@ -103,7 +103,7 @@ So if for whatever reason, one of your variables gets destroyed because you're d
 Go ahead and switch out your kernel and you'll be good in no time the next piece we want to know about.
 So we're gonna need to import the Sagemaker python SDK.
 So again, that's an open source library that the Sagemaker team is developing in order for us to use the methods that they've built.
-Ah, that's gonna include getting the execution role that's going to use an STS service that's actually grabbing the I am policy that's associated with our notebook and then is giving Sagemaker access to our S3 bucket.
+Ah, that's gonna include getting the execution role that's going to use an STS service that's actually grabbing the IAM policy that's associated with our notebook and then is giving Sagemaker access to our S3 bucket.
 We're gonna have our Sagemaker session.
 We're gonna have our default bucket, and so the default buckets that is gonna live inside of every account it's gonna be created when you run that line.
 If you want to use your own bucket, go ahead and just paste in the name of the bucket name.
@@ -174,7 +174,7 @@ We're getting our execution role.
 We've got our session.
 We've got our default bucket, and this scenario, we're actually going to be copying a data set from the Internet s.
 Oh, this is from Sarraf.
-He's the author of the blazing text algorithm, and we're gonna be getting this data set from Hiss site and then we're gonna cruise down.
+He's the author of the BlazingText algorithm, and we're gonna be getting this data set from Hiss site and then we're gonna cruise down.
 And in this case, um, were getting a d v p A set s Oh, this is coming from Wikipedia.
 There are 500,000 articles and all those 500,000 articles air tagged based on what category they fall into.
 So that's either author or company or means of transportation or a natural place.
@@ -188,7 +188,7 @@ Ah, here's a quick little mapper that's just going to create basically a hash ma
 And then here we're gonna do some feature pre processing.
 And what I like about this example is that we're doing this pre processing in parallel on the notebook instance so even know, even though we only have two cores on that t three medium, we're going to be running our data through both of those cores using a map produce.
 And the colonel makes it super easy.
-Eso here is that single function right that takes a row, runs through the transformation, doing somewhere token izing blazing text.
+Eso here is that single function right that takes a row, runs through the transformation, doing somewhere token izing BlazingText.
 You do need this little label here, um, little string specifications.
 And then here's the actual map produce s we're reading in all that data, depending it to this structure.
 Ah, calling Shuffle Keynote.
