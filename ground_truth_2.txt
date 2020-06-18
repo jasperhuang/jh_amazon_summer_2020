@@ -77,12 +77,12 @@ Segmentation really comes in handy.
 Topic modeling.
 So if we've got a data set that's full of tweets, for example, and we want to cruise through that and figure out what the topics are within sagemaker, we have built in algorithms that you can use to build your own topic modeler.
 And that's latent dirichlet allocation and neural topic modeling, working with texts.
-So for those of you out there who like natural language processing we're gonna have algorithms that are gonna be able to natively support text and so that's called blazing text blazing text has two modes.
+So for those of you out there who like natural language processing we're gonna have algorithms that are gonna be able to natively support text and so that's called BlazingText BlazingText has two modes.
 One is supervised, which supports classification, and the other one is unsupervised.
 And that's just gonna get embeddings.
 Embeddings are a phenomenal way that you can add intelligence to your machine learning projects.
 So rather than just having single vectors of all of your different attributes that are usually pretty sparse, right with all of your zeros, you can actually bring those down to a single fixed length word embedding that you can feed into another machine learning model.
-And what's nice is that those embeddings are all interrelated and so blazing text can actually understand the contextual meaning of those words.
+And what's nice is that those embeddings are all interrelated and so BlazingText can actually understand the contextual meaning of those words.
 So a lot of people are familiar with TFIDF scoring or a bag of words or even count vectorizing. 
 Word Embeddings is like another step on top of this where we're actually learning the contextual representation of each word.
 Pretty cool stuff.

@@ -68,8 +68,8 @@ So if they're interested in understanding how Sagemaker is gonna handle training
 You can select the new button and then cruise down to create new notebooks and terminals.
 We're gonna learn about the terminal feature right here.
 So on the right hand side, you select new and then down on the left hand side, you're gonna select create a new terminal, and then this is gonna open up your view.
-And so the terminal that is something that exists within every Jupiter environment that folks are gonna use.
-However, many of us weren't necessarily aware of it prior to using Sagemaker because the most common polices to develop Jupiter's based solutions are either on a desktop or there on a server.
+And so the terminal that is something that exists within every Jupyter environment that folks are gonna use.
+However, many of us weren't necessarily aware of it prior to using Sagemaker because the most common polices to develop Jupyter's based solutions are either on a desktop or there on a server.
 And if they're on a desktop.
 We typically already have a bash shell that's already opened up.
 So we wouldn't even need to see it within that desktop view.
@@ -84,7 +84,7 @@ So on the left hand side, we're gonna see all of those folders.
 Those folders are working out over different cases of applying machine learning different types of machine learning algorithms.
 Using are different types of data distribution every time you selection of those.
 Just go ahead and hit use and then create a copy.
-And that's actually gonna copy the files that you need to have into the home directory of your Jupiter notebook.
+And that's actually gonna copy the files that you need to have into the home directory of your Jupyter notebook.
 And then all of those example No books are open sourced its on the right hand side, those air a Github.
 That's a Github site that's full of those 200 plus examples.
 Okay, so when you open up a single notebook, this is what it's gonna look like.

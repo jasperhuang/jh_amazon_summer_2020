@@ -23,10 +23,10 @@ Include any extra libraries that you're gonna have with the requirements dot txt
 So when you're interested in running inference with that model, you're gonna be able to leverage a managed Web server okay.
 When you bring your own docker file, this is what's gonna what it's gonna look like you're gonna import from the sagemaker examples.
 You can install any libraries that you need to you can run additional installations, and then in this case, there's a copyright.
-So there's a copy on mars dot R into opt ml.
-And then this copy of plumber dot R into opt ml.
-And so everything with inside sagemaker is looking inside opt ml.
-So it's gonna be looking directly within that location for your both your model and your inference code and then, in this case, we're specifying the entry point as Mars dot R.
+So there's a copy on mars.R into /opt/ml.
+And then this copy of plumber dot R into /opt/ml.
+And so everything with inside sagemaker is looking inside /opt/ml.
+So it's gonna be looking directly within that location for your both your model and your inference code and then, in this case, we're specifying the entry point as mars.R.
 So just to walk through that when you bring your own docker file, that means you, as the customer are managing the creation of that container and the registry within ECR that means that you can write your model however you please.
 You'll want to point to your model within your docker file.
 You'll want to register that container on ECR and you want to point to your containers address in ECR within your sagemaker estimator and then don't forget to implement a serve function So even if you're just doing the training, we're still going to check for a function that's called serve, and so make sure you have something implemented there.
@@ -56,8 +56,8 @@ We need some permissions.
 I'm gonna open up the R model so you can see it.
 And here's our new folder.
 And here is the R model that we're actually looking at.
-So that's mars dot R.
-You'll notice that the prefix is opt ml.
+So that's mars.R.
+You'll notice that the prefix is /opt/ml.
 we've got our input output model path.
 Channel name.
 We're gonna learn about that in the next session.
@@ -72,7 +72,7 @@ And then just to check out the docker file.
 So we are pulling from the sagemaker.
 Example.
 Maintainer.
-Installing those R based libraries, copying it into ml into opt ml and specifying that entry point and then just to show you the estimator here while this example is running.
+Installing those R based libraries, copying it into ml into /opt/ml and specifying that entry point and then just to show you the estimator here while this example is running.
 So this is the set where it's actually publishing an ECR.
 And then down here are the training parameters.
 So this is the actual image, right?
@@ -90,7 +90,7 @@ So you can test the creation of your docker file on your notebook instance befor
 And then obviously on the machine learning marketplace, you can move very quickly.
 There are hundreds of options that are available on the marketplace.
 You can find one and get to use it right away.
-Just remember that sagemaker within the container is gonna read from opt ml and definitely find an example that fits your needs.
+Just remember that sagemaker within the container is gonna read from /opt/ml and definitely find an example that fits your needs.
 Whether that's using Keras, tensorflow, mxnet pytorch or any specific framework or scenario that you're looking at, find that example.
 Run through it and make sure that you understand how it works and then just modify it and it will absolutely work.
 So thank you very much.
